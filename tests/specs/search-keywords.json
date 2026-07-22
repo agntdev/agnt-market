@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Search Architects",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Find architects using keyword search"
+            }
+          }
+        ],
+        "send": {
+          "callback": "search:keywords"
+        }
+      }
+    ]
+  }
+]
