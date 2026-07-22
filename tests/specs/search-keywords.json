@@ -1,19 +1,68 @@
 [
   {
-    "name": "Search Architects",
+    "name": "Search — keyword too short",
     "steps": [
       {
+        "send": { "callback": "search:keywords" },
         "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Find architects using keyword search"
-            }
-          }
-        ],
-        "send": {
-          "callback": "search:keywords"
-        }
+          { "method": "answerCallbackQuery" },
+          { "method": "sendMessage", "payload": { "text": "Type a keyword to search for architects (e.g. \"ecommerce\", \"Python\", \"booking\"):" } }
+        ]
+      },
+      {
+        "send": { "text": "a" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Please enter at least 2 characters to search." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Search — no results found",
+    "steps": [
+      {
+        "send": { "callback": "search:keywords" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          { "method": "sendMessage" }
+        ]
+      },
+      {
+        "send": { "text": "zzzznonexistent" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "No architects found for \"zzzznonexistent\". Try different keywords?" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Browse categories — empty category shows empty state",
+    "steps": [
+      {
+        "send": { "callback": "browse:categories" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          { "method": "editMessageText", "payload": { "text": "Pick a category to browse architects:" } }
+        ]
+      },
+      {
+        "send": { "callback": "cat:Finance & Payments" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          { "method": "editMessageText", "payload": { "text": "No architects in \"Finance & Payments\" yet — check back soon." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Contact — architect not available",
+    "steps": [
+      {
+        "send": { "callback": "contact:init:nonexistent_id" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          { "method": "editMessageText", "payload": { "text": "This profile is no longer available." } }
+        ]
       }
     ]
   }

@@ -1,0 +1,57 @@
+[
+  {
+    "name": "Admin dashboard — non-admin rejected",
+    "steps": [
+      {
+        "send": { "callback": "admin:dashboard" },
+        "expect": [
+          { "method": "answerCallbackQuery", "payload": { "text": "Admin access required." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Add architect — non-admin rejected",
+    "steps": [
+      {
+        "send": { "callback": "admin:add_arch" },
+        "expect": [
+          { "method": "answerCallbackQuery", "payload": { "text": "Admin access required." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "List architects — non-admin rejected",
+    "steps": [
+      {
+        "send": { "callback": "admin:list_arch" },
+        "expect": [
+          { "method": "answerCallbackQuery", "payload": { "text": "Admin access required." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Review contacts — non-admin rejected",
+    "steps": [
+      {
+        "send": { "callback": "admin:review_contacts" },
+        "expect": [
+          { "method": "answerCallbackQuery", "payload": { "text": "Admin access required." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Manage categories — non-admin rejected",
+    "steps": [
+      {
+        "send": { "callback": "admin:categories" },
+        "expect": [
+          { "method": "answerCallbackQuery", "payload": { "text": "Admin access required." } }
+        ]
+      }
+    ]
+  }
+]

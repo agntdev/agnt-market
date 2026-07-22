@@ -1,19 +1,25 @@
 [
   {
-    "name": "Contact Architect",
+    "name": "Contact Architect — empty state",
     "steps": [
       {
+        "send": { "callback": "contact:init" },
         "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Open contact form with selected architect"
-            }
-          }
-        ],
-        "send": {
-          "callback": "contact:init"
-        }
+          { "method": "answerCallbackQuery" },
+          { "method": "editMessageText", "payload": { "text": "No architects available yet — check back soon." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Contact Architect — invalid architect ID",
+    "steps": [
+      {
+        "send": { "callback": "contact:init:bad_id" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          { "method": "editMessageText", "payload": { "text": "This profile is no longer available." } }
+        ]
       }
     ]
   }
