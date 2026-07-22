@@ -1,19 +1,32 @@
 [
   {
-    "name": "Browse Categories",
+    "name": "Browse Categories — shows category list",
     "steps": [
       {
+        "send": { "callback": "browse:categories" },
         "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "View architect listings by curated category"
-            }
-          }
-        ],
-        "send": {
-          "callback": "browse:categories"
-        }
+          { "method": "answerCallbackQuery" },
+          { "method": "editMessageText", "payload": { "text": "Pick a category to browse architects:" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Browse Categories — empty category",
+    "steps": [
+      {
+        "send": { "callback": "browse:categories" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          { "method": "editMessageText" }
+        ]
+      },
+      {
+        "send": { "callback": "cat:Data & Analytics" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          { "method": "editMessageText", "payload": { "text": "No architects in \"Data & Analytics\" yet — check back soon." } }
+        ]
       }
     ]
   }
